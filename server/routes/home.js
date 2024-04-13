@@ -7,4 +7,6 @@ router.get('/', authenticateToken, homeController.getHomePage);
 
 router.post('/mood', authenticateToken, homeController.postMood);
 
+router.get('/graph', authenticateToken, homeController.getMoodDataForGraph);
+
 module.exports = router;

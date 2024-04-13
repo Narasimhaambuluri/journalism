@@ -2,6 +2,8 @@ const User = require('../models/User');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { LocalStorage } = require('node-localstorage');
+const localStorage = new LocalStorage('./storage');
 
 exports.getRegisterPage = async(req,res) =>{
     const info = {
@@ -51,6 +53,7 @@ exports.loginUser = async(req,res)=>{
     const isValidPassword = await bcrypt.compare(password, user.hash);
     if (!isValidPassword) return res.status(400).redirect('/login');
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET);
+    localStorage.setItem('AUTH_TOKEN',token)
     req.session.token = token;
     return res.redirect('/');
 } catch (error) {
@@ -61,5 +64,6 @@ exports.loginUser = async(req,res)=>{
 
 exports.logoutUser = async(req,res)=>{
     delete req.session.token;
+    localStorage.removeItem('AUTH_TOKEN')
     return res.redirect('/login');
  }

@@ -2,8 +2,20 @@ a{
     text-decoration: none !important;
 }
 
+.mcard {
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .mcard-body {
+    flex: 1 !important;
+  }
+
 footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+}
+
+ul{
+    list-style: none !important;
 }

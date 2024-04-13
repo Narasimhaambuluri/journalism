@@ -2,17 +2,14 @@ const mongoose = require('mongoose');
 
 const mschema = mongoose.Schema;
 
-const ForumPostSchema = new mongoose.Schema({
+const CommentSchema = new mongoose.Schema({
     userId:{
         type: String
     },
-    title:{
+    postId:{
         type: String
     },
-    image:{
-        type: String
-    },
-    content:{
+    comment:{
         type: String
     },
     createdAt:{
@@ -21,4 +18,4 @@ const ForumPostSchema = new mongoose.Schema({
 })
 
 
-module.exports = mongoose.model('Post',ForumPostSchema)
+module.exports = mongoose.model('Comment',CommentSchema)

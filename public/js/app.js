@@ -1,6 +1,62 @@
 
 
-function loadChart() {
+$(document).ready(function() {
+    var maxHeight = 0;
+    $('.mcard').each(function() {
+      var currentHeight = $(this).outerHeight();
+      if (currentHeight > maxHeight) {
+        maxHeight = currentHeight;
+      }
+    });
+    $('.mcard').css('height', maxHeight);
+
+    $('#commentModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var dataId = button.attr('data-id');
+        $('#modalDataId').val(dataId);
+        $('#commentList').empty();
+        $.ajax({
+            url: '/comments',
+            method: 'GET',
+            data: { postId: dataId },
+            success: function(response) {
+                response.forEach(function(comment) {
+                    $('#commentList').append('<li class="border border-secondary p-1 my-1">' + comment.comment + '</li>');
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching comments:', error);
+            }
+        });
+    });
+
+    function fetchMoodData(duration) {
+        console.log(duration)
+        $.ajax({
+            url: '/graph',
+            method: 'GET',
+            data: { duration: duration },
+            success: function(response) {
+                console.log('Mood data fetched successfully:', response);
+                loadChart(response)
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching mood data:', error);
+            }
+        });
+    }
+
+    $('#durationSelect').change(function() {
+        const selectedDuration = $(this).val();
+        fetchMoodData(selectedDuration);
+    });
+
+    fetchMoodData('PastWeek');
+
+
+  });
+
+function loadChart(data) {
 
     console.log('loaded')
 
@@ -13,20 +69,20 @@ function loadChart() {
             align: 'left'
         },
         xAxis: {
-            categories: ['USA', 'China', 'Brazil', 'EU', 'India', 'Russia'],
+            categories: [],
             crosshair: true,
             accessibility: {
-                description: 'Countries'
+                description: 'Moods'
             }
         },
         yAxis: {
             min: 0,
             title: {
-                text: '1000 metric tons (MT)'
+                text: 'Values'
             }
         },
         tooltip: {
-            valueSuffix: ' (1000 MT)'
+            valueSuffix: ' '
         },
         plotOptions: {
             column: {
@@ -46,7 +102,7 @@ function loadChart() {
         series: [
             {
                 name: 'Mood',
-                data: [406292, 260000, 107000, 68300, 27500, 14500]
+                data: data
             },
         ]
     });

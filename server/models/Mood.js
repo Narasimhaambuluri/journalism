@@ -9,6 +9,9 @@ const MoodSchema = new mongoose.Schema({
     mood:{
         type: Number
     },
+    createdAt:{
+        type: Date
+    },
 })
 
 

@@ -20,4 +20,7 @@ router.post('/forum', upload.single('image'), (req, res) => {
     forumControler.postForumPost(req, res, req.file.filename);
 });
 
+router.get('/comments', forumControler.getPostComments);
+router.post('/comments', forumControler.postComment);
+
 module.exports = router

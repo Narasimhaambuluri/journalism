@@ -9,16 +9,45 @@
     </div>
     <div class="row p-3">
         <% posts.forEach(entry=> { %>
-            <div class="col-md-12 m-2">
+            
+            <div class="col-md-3">
                 <div class="col-md-">
-                    <div class="card">
+                    <div class="card m-2">
+                        <img src="/uploads/<%= entry.image %>" style="height: 150px;" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <%= entry.entry %>
+                          <h5 class="card-title"><%= entry.title %></h5>
+                          <p class="card-text"> <%= entry.content %></p>
                         </div>
-                    </div>
+                        <div class="card-footer">
+                            <a href="#" data-id="<%= entry._id %>" data-bs-toggle="modal" data-bs-target="#commentModal"><i class="bi bi-chat-fill"></i> <%= entry.commentsCount %> comments</a>
+                        </div>
+                      </div>
                 </div>
             </div>
             <% }); %>
+    </div>
+</div>
+
+<div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="commentModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form action="/comments" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="commentModalLabel">Comments</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="commentList"></ul>
+                    <input name="postId" type="hidden" id="modalDataId">
+                    <div class="form-group">
+                        <textarea name="comment" type="text" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-secondary">Post Comment</button>
+                </div>
+            </div>
+        </form>
     </div>
 </div>
 

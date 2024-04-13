@@ -7,10 +7,10 @@
                         <div class="h4">Mood tracker for</div>
                     </div>
                     <div class="col-md-6">
-                        <select name="" id="" class="form-control">
-                            <option value="">Past Week</option>
-                            <option value="">Two Weeks</option>
-                            <option value="">One Month</option>
+                        <select name="durationSelect" id="durationSelect" class="form-control">
+                            <option value="PastWeek">Past Week</option>
+                            <option value="TwoWeeks">Two Weeks</option>
+                            <option value="OneMonth">One Month</option>
                         </select>
                     </div>
                 </div>
@@ -65,8 +65,8 @@
                 <% journals.forEach(entry=> { %>
                     <div class="col-md-4">
                         <div class="col-md-">
-                            <div class="card">
-                                <div class="card-body">
+                            <div class="card mcard">
+                                <div class="card-body mcard-body">
                                     <%= entry.entry %>
                                 </div>
                             </div>
