@@ -33,6 +33,7 @@ app.set('view engine', 'ejs');
 app.use('/',require('./server/routes/users'));
 app.use('/',require('./server/routes/home'));
 app.use('/',require('./server/routes/journal'));
+app.use('/',require('./server/routes/forum'));
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)

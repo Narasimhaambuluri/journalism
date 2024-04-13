@@ -1,4 +1,4 @@
-<div class="container py-5 bg-light mt-2 mb-5">
+<div class="container py-5 bg-light mt-2 rounded" >
     <div class="row">
         <div class="col-md-6">
             <div class="card elevation-0 p-2">
@@ -27,9 +27,9 @@
                     <div class="h5"> <span class="text-danger fw-bold">10:</span> Extremely Happy</div>
                 </div>
                 <div class="form-sub">
-                    <form action="" method="post">
+                    <form action="/mood" method="post">
                         <div class="form-group my-2">
-                            <select name="" id="" class="form-control">
+                            <select name="mood" id="mood" class="form-control">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
                                 <option value="3">3</option>
@@ -43,7 +43,7 @@
                             </select>
                         </div>
                         <div class="form-group my-2">
-                            <button class="btn btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
@@ -60,12 +60,34 @@
                 <a href="/journal/create" class="btn btn-outline-primary">Create New Entry</a>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    Journal Entry
+        <% if (journals.length> 0) { %>
+            <div class="row my-4">
+                <% journals.forEach(entry=> { %>
+                    <div class="col-md-4">
+                        <div class="col-md-">
+                            <div class="card">
+                                <div class="card-body">
+                                    <%= entry.entry %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+            </div>
+            <% } else { %>
+                <div class="row">
+                    <div class="col-md-12">
+                        No journal entries found.
+                    </div>
+                </div>
+                <% } %>
+
+          <% if (journals.length> 2) { %>
+            <div class="row mb-5 mx-2">
+                <div class="col-md-12">
+                    <a href="/journals" class="text-primary">View More</a>
                 </div>
             </div>
-        </div>
+          <% } %>
     </div>
 </div>

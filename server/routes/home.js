@@ -5,4 +5,6 @@ const authenticateToken = require('../middleware/auth');
 
 router.get('/', authenticateToken, homeController.getHomePage);
 
+router.post('/mood', authenticateToken, homeController.postMood);
+
 module.exports = router;
