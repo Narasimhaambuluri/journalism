@@ -34,6 +34,15 @@ Highcharts.chart('container', {
             borderWidth: 0
         }
     },
+    navigation: {
+        buttonOptions: {
+            enabled: false 
+        }
+    },
+
+    credits: {
+        enabled: false
+    },
     series: [
         {
             name: 'Mood',
