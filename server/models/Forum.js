@@ -18,9 +18,6 @@ const ForumPostSchema = new mongoose.Schema({
     createdAt:{
         type: String
     },
-    author:{
-        type: String
-    },
 })
 
 
