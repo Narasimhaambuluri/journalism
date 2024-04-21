@@ -1,9 +1,15 @@
 <div class="container-fluid d-flex align-items-center justify-content-center my-5 py-5">
     <div class="card p-3">
         <form method="post" action="/register">
+
+            
             <div class="mb-3 mx-2">
-                <h1>AnxietyJournal</h1>
+                <h1>Breathe-Bloom</h1>
             </div>
+
+             <!-- Add an element to display error messages -->
+             <div class="mb-3" id="error-message"></div>
+
             <div class="mb-3">
                 <div class="input-group">
                     <input type="text" class="form-control" placeholder="Enter Full Name"
@@ -50,3 +56,18 @@
         </form>
     </div>
 </div>
+
+<script>
+    window.onload = function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorMessage = urlParams.get('error');
+        if (errorMessage) {
+            const errorText = {
+                'email_exists': 'Email already exists. Please use a different email.',
+                'register_failure': 'Failed to register. Please try again later.'
+            }[errorMessage] || 'An unknown error occurred.';
+            const errorDiv = document.getElementById('error-message');
+            errorDiv.innerHTML = `<div class="alert alert-danger">${errorText}</div>`;
+        }
+    };
+</script>

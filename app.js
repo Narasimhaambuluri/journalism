@@ -10,7 +10,7 @@ const dbConnection = require('./server/db/database');
 dbConnection();
 
 const app = express();
-const port = 5000 || process.env.port
+const port = process.env.PORT || 3000
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -33,6 +33,7 @@ app.set('view engine', 'ejs');
 app.use('/',require('./server/routes/users'));
 app.use('/',require('./server/routes/home'));
 app.use('/',require('./server/routes/journal'));
+app.use('/',require('./server/routes/resource'));
 app.use('/',require('./server/routes/forum'));
 
 app.listen(port, () => {

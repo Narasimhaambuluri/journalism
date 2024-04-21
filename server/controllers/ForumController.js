@@ -6,9 +6,10 @@ const { LocalStorage } = require('node-localstorage');
 const localStorage = new LocalStorage('./storage');
 
 const token = localStorage.getItem('AUTH_TOKEN')
-// console.log('local token',token)
+console.log('local token',token)
 
 exports.getForumPage = async(req,res) =>{
+
     const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
     const userId = decodedToken.userId;
     const posts = await Forum.find();
